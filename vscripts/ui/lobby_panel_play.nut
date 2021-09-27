@@ -1370,7 +1370,7 @@ void function ReadyShortcut_OnActivate( var panel )
 
 void function ReadyButton_OnActivate( var button )
 {
-	AdvanceMenu( GetMenu( "MainMenu" ) )
+	//AdvanceMenu( GetMenu( "MainMenu" ) )
 	ClientCommand( "ccompanion" )
 	//AdvanceMenu( GetMenu( "SocialMenu" ) )
 }
