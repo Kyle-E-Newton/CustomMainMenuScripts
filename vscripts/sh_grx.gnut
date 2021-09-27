@@ -682,6 +682,7 @@ bool function GRX_IsInventoryReady( entity player = null )
 		player = GetUIPlayer()
 	#endif
 	return false
+	return GetPlayerGRXScriptState( player ).isInventoryReady
 }
 #endif
 
@@ -778,7 +779,7 @@ bool function IsItemOwnedByPlayerInternal( ItemFlavor flav, entity player = null
 	if ( ItemFlavor_GetType( flav ) == eItemType.character )
 		return true
 
-	return false
+	//return false
 
 	if ( !GRX_IsGRXEnabled() )
 		return true
