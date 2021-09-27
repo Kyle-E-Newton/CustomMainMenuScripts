@@ -76,58 +76,22 @@ void function InitMainMenuPanel( var panel )
 	//file.autoConnect = GetConVarInt( "ui_lobby_noautostart" ) == 0 // TEMP, need code to add convar which defaults to 1
 
 	#if PC_PROG
-		AddPanelFooterOption( panel, LEFT, BUTTON_B, true, "#B_BUTTON_EXIT_TO_DESKTOP", "#B_BUTTON_EXIT_TO_DESKTOP", null, IsExitToDesktopFooterValid )
-		AddButtonTest( panel, LEFT, KEY_F, true, "", "Go To Lobby", GoToLobby_OnActivate, null, null )
+		AddPanelFooterOption( panel, LEFT, KEY_TAB, true, "Back To Main Menu", "Back To Main Menu", BackToMainMenu, null )
+	// AddPanelFooterOption( panel, LEFT, KEY_TAB, false, "", "#DATACENTER_DOWNLOADING", OpenDataCenterDialog, IsDataCenterFooterVisible, UpdateDataCenterFooter )
 	#endif // PC_PROG
+	// AddPanelFooterOption( panel, LEFT, BUTTON_STICK_RIGHT, false, "#DATACENTER_DOWNLOADING", "", OpenDataCenterDialog, IsDataCenterFooterVisible, UpdateDataCenterFooter )
+	//AddPanelFooterOption( panel, LEFT, BUTTON_START, true, "#START_BUTTON_ACCESSIBLITY", "#BUTTON_ACCESSIBLITY", Accessibility_OnActivate, IsAccessibilityFooterValid )
+
+	#if DURANGO_PROG
+		AddPanelFooterOption( panel, LEFT, BUTTON_Y, true, "#Y_BUTTON_SWITCH_PROFILE", "", SwitchProfile_OnActivate, IsSwitchProfileFooterValid )
+	#endif
+
+	#if CONSOLE_PROG
+		AddMenuVarChangeHandler( "CONSOLE_isSignedIn", UpdateFooterOptions )
+		AddMenuVarChangeHandler( "CONSOLE_isSignedIn", UpdateSignedInState )
+	#endif // CONSOLE_PROG
 }
 
-void function GoToLobby_OnActivate( var button )
-{
-	AdvanceMenu( GetMenu( "LobbyMenu" ) )
-}
-
-InputDef function AddButtonTest( var panel, int alignment, int input, bool clickable, string gamepadLabel, string mouseLabel = "", void functionref( var ) activateFunc = null, bool functionref() conditionCheckFunc = null, void functionref( InputDef ) updateFunc = null )
-{
-	//if ( input == BUTTON_A )
-	//	Assert( activateFunc == null || mouseLabel != "", "Footer input BUTTON_A has a non-null activateFunc! It should always be null to avoid conflicting with code button event handlers." )
-
-	if ( input == BUTTON_B )
-	{
-		if ( activateFunc == null )
-		{
-			//printt( "----------activateFunc is null----------" )
-			activateFunc = PCBackButton_Activate
-			//printt( "----------activateFunc is now----------", string(activateFunc) )
-		}
-
-		Assert( activateFunc == PCBackButton_Activate, "Footer input BUTTON_B can only use PCBackButton_Activate() for activateFunc!" )
-	}
-
-	array<InputDef> footerData = uiGlobal.panelData[ panel ].footerData
-
-	foreach ( entry in footerData )
-	{
-		// For mouse we need to execute a func even if just to call UICodeCallback_NavigateBack
-		// Code automatically calls this in every other case
-
-		if ( entry.input == input )
-			Assert( entry.conditionCheckFunc != null, "Duplicate footer input found with no conditional! Duplicates require a conditional." )
-	}
-
-	InputDef data
-	data.alignment = alignment
-	data.input = input
-	data.clickable = clickable
-	data.gamepadLabel = gamepadLabel
-	data.mouseLabel = mouseLabel
-	data.activateFunc = activateFunc
-	data.conditionCheckFunc = conditionCheckFunc
-	data.updateFunc = updateFunc
-
-	footerData.append( data )
-
-	return data
-}
 
 #if PC_PROG
 bool function IsExitToDesktopFooterValid()
@@ -135,6 +99,22 @@ bool function IsExitToDesktopFooterValid()
 	return !IsWorking() && !IsSearchingForPartyServer()
 }
 #endif // PC_PROG
+
+void function BackToMainMenu( var button )
+{
+	#if DURANGO_PROG
+		if ( !Console_IsSignedIn() )
+			return
+	#endif
+
+	if ( IsDialog( GetActiveMenu() ) )
+		return
+
+	if ( !IsAccessibilityAvailable() )
+		return
+
+	AdvanceMenu( GetMenu( "LobbyMenu" ) )
+}
 
 
 bool function IsAccessibilityFooterValid()
@@ -196,17 +176,15 @@ void function OnMainMenuPanel_Show( var panel )
 {
 	file.startTime = Time()
 
-	//AccessibilityHintReset()
-	//EnterLobbySurveyReset()
+	AccessibilityHintReset()
+	EnterLobbySurveyReset()
 
-	//thread MainMenu_Think()
+	thread MainMenu_Think()
 
-	//thread PrelaunchValidation()
+	thread PrelaunchValidation()
 
 	ExecCurrentGamepadButtonConfig()
 	ExecCurrentGamepadStickConfig()
-
-	AdvanceMenu( GetMenu( "LobbyMenu" ) )
 }
 
 void function MainMenu_Think()
@@ -235,6 +213,9 @@ void function PrelaunchValidation( bool autoContinue = false )
 
 	SetLaunchState( eLaunchState.WORKING )
 
+	SetLaunchState( eLaunchState.CANT_CONTINUE, "Only Try to connect to lobbys via this menu! This is a workaround until i fiqure out how to fix the lobby bug" )
+
+	return
 #if SPINNER_DEBUG_INFO
 	SetSpinnerDebugInfo( "PrelaunchValidation" )
 #endif
@@ -790,7 +771,7 @@ void function PS4_PSNSignIn()
 			SetLaunchState( eLaunchState.WAIT_TO_CONTINUE, Localize( "#PS4_DISCONNECT_NOT_SIGNED_IN_TO_PSN" ), Localize( "#MAINMENU_SIGN_IN" ) )
 		}
 		else
-		{
+		{		
 			//printt( "!!!!!!!!!!!!!!!!!!!!!!!!! PS4_getUserNetworkingResolution", PS4_getUserNetworkingResolution() )
 			//printt( "!!!!!!!!!!!!!!!!!!!!!!!!! Ps4_PSN_Is_Loggedin", Ps4_PSN_Is_Loggedin() )
 
@@ -898,7 +879,18 @@ bool function HasPermission()
 
 void function Accessibility_OnActivate( var button )
 {
-	AdvanceMenu( GetMenu( "LobbyMenu" ) )
+	#if DURANGO_PROG
+		if ( !Console_IsSignedIn() )
+			return
+	#endif
+
+	if ( IsDialog( GetActiveMenu() ) )
+		return
+
+	if ( !IsAccessibilityAvailable() )
+		return
+
+	AdvanceMenu( GetMenu( "AccessibilityDialog" ) )
 }
 
 

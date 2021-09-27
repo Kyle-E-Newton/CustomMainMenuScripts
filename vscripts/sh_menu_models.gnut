@@ -2485,7 +2485,7 @@ void function UI_SetPresentationType( int newPresentationType )
 
 	//RunClientScript( "SetPresentationType", GetLocalClientPlayer(), newPresentationType, file.interpolateCameraMoves )
 
-	//file.activePresentationType = newPresentationType
+	file.activePresentationType = newPresentationType
 
 	//if ( newPresentationType == ePresentationType.PLAY )
 		//RunClientScript( "UpdateMenuWithPartyMembers" )
