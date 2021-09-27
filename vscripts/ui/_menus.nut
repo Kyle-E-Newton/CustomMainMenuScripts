@@ -183,7 +183,9 @@ void function UICodeCallback_InboxUpdated()
 void function UICodeCallback_CloseAllMenus()
 {
 	printt( "UICodeCallback_CloseAllMenus" )
+
 	CloseAllMenus()
+
 	// This is usually followed by a call to UICodeCallback_ActivateMenus().
 }
 
@@ -407,7 +409,9 @@ bool function UICodeCallback_LevelLoadingStarted( string levelname )
 {
 	printt( "UICodeCallback_LevelLoadingStarted: " + levelname )
 
-	CloseAllMenus()
+	//AdvanceMenu( GetMenu( "MainMenu" ) )
+	//ShutdownAllPanels()
+	//CloseAllMenus()
 
 	Signal( uiGlobal.signalDummy, "EndFooterUpdateFuncs" )
 	Signal( uiGlobal.signalDummy, "EndSearchForPartyServerTimeout" )
