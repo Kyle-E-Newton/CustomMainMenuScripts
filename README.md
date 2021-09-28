@@ -11,5 +11,5 @@ move the custom detours over into your main apex folder and replace.
 
 
 Downloads:
-Custom Detours: https://mega.nz/file/Ggwi2Cza#5CbQVhYlpSJwA2uXo6kUU5_uuM2IsVFmtGnunDPmEvc
+Custom Detours: https://mega.nz/file/KthAEZra#P0NhYuf8gpZUxdZTEX2zOVQ0kepBTBRKiGnEGLwEgmw
 Frontend.bik: https://mega.nz/file/60JAEBJI#coDp-C_7DvTgDo6u_Mfr3S82DfSzrzSopjnigE2XK0g
