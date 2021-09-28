@@ -236,6 +236,7 @@ void function LobbyMenuUpdate()
 	EndSignal( uiGlobal.signalDummy, "LobbyMenuUpdate" )
 	EndSignal( uiGlobal.signalDummy, "CleanupInGameMenus" )
 
+	WaitFrame()
 	ClientCommand( "ccompanion" )
 	WaitFrame()
 	ClientCommand( "ccompanion" )

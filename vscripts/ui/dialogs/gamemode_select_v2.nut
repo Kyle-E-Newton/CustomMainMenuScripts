@@ -265,16 +265,6 @@ void function OnOpenModeSelectDialog()
 	Hud_SetWidth( gamemodebutton1, 250 )
 	Hud_Show( gamemodebutton1 )
 	drawWidth += (REPLACEHud_GetPos( gamemodebutton1 ).x + Hud_GetWidth( gamemodebutton1 ))
-
-	if (IsThereServers())
-	{
-		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "", false )
-	}
-	else
-	{
-		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "No Servers Available", true )
-	}
-
 	GamemodeSelectV2_PlayVideo( gamemodebutton1, "generic_02" )
 
 	var gamemodebutton2 = Hud_GetChild( file.menu, "GamemodeButton2" )
@@ -312,6 +302,15 @@ void function OnOpenModeSelectDialog()
 	RuiSetBool( Hud_GetRui( file.selectionPanel ), "hasLimitedMode", false )
 	RuiSetFloat( Hud_GetRui( file.selectionPanel ), "drawWidth", (drawWidth / scale) )
 	Hud_SetWidth( file.selectionPanel, drawWidth )
+
+	if (IsThereServers())
+	{
+		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "", false )
+	}
+	else
+	{
+		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "No Servers Available", true )
+	}
 }
 
 void function OnCloseModeSelectDialog()
