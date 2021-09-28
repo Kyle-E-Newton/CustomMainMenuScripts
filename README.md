@@ -3,15 +3,13 @@ This is the scripts for my custom main menu for r5reloaded
 
 Quick install guide
 
-move vscripts over to your scripts folder and replace.
+move the platform folder into your main folder and replace.
+
+move r5detours.dll and r5dev.dll over into your main apex folder and replace.
 
 move the frontend.bik file into your apex media folder and replace. (%apexfolder%/media/)
-
-move the custom detours over into your main apex folder and replace.
 
 
 Downloads:
 
-Custom Detours: https://mega.nz/file/Gpo2FYiA#9_b_ZhPrHEC66jkm4pqQg0Zwj3Fr20cFkGQsuELiGCk
-
-Frontend.bik: https://mega.nz/file/60JAEBJI#coDp-C_7DvTgDo6u_Mfr3S82DfSzrzSopjnigE2XK0g
+Frontend.bik: https://mega.nz/file/aw4AxRTR#eMunh5wlqp6B9zeNOGnpke08RZAyPtx5Ou0zx4ve_ms
