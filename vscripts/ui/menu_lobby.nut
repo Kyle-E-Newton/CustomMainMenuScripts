@@ -236,6 +236,12 @@ void function LobbyMenuUpdate()
 	EndSignal( uiGlobal.signalDummy, "LobbyMenuUpdate" )
 	EndSignal( uiGlobal.signalDummy, "CleanupInGameMenus" )
 
+	ClientCommand( "ccompanion" )
+	WaitFrame()
+	ClientCommand( "ccompanion" )
+	WaitFrame()
+	ClientCommand( "refreshserverlist" )
+
 	while ( true )
 	{
 		PlayPanelUpdate()

@@ -266,7 +266,7 @@ void function OnOpenModeSelectDialog()
 	Hud_Show( gamemodebutton1 )
 	drawWidth += (REPLACEHud_GetPos( gamemodebutton1 ).x + Hud_GetWidth( gamemodebutton1 ))
 
-	if (false/*IsThereServers()*/)
+	if (IsThereServers())
 	{
 		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "", false )
 	}
