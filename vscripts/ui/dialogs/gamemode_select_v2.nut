@@ -3,6 +3,7 @@ global function GamemodeSelectV2_IsEnabled
 global function GamemodeSelectV2_UpdateSelectButton
 global function GamemodeSelectV2_PlayVideo
 global function GamemodeSelectV2_PlaylistIsDefaultSlot
+global function GamemodeSelectV2_UpdateSelectButton2
 
 struct {
 	var menu
@@ -249,8 +250,6 @@ void function OnOpenModeSelectDialog()
 		}
 	}
 
-
-
 	var gamemodebutton0 = Hud_GetChild( file.menu, "GamemodeButton0" )
 
 	Hud_SetX( gamemodebutton0, REPLACEHud_GetBasePos( gamemodebutton0 ).x )
@@ -266,7 +265,16 @@ void function OnOpenModeSelectDialog()
 	Hud_SetWidth( gamemodebutton1, 250 )
 	Hud_Show( gamemodebutton1 )
 	drawWidth += (REPLACEHud_GetPos( gamemodebutton1 ).x + Hud_GetWidth( gamemodebutton1 ))
-	GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "Not Finished", true )
+
+	if (false/*IsThereServers()*/)
+	{
+		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "", false )
+	}
+	else
+	{
+		GamemodeSelectV2_UpdateSelectButton2( gamemodebutton1, "Quick Join", "generic_02", "Joins a random server", "No Servers Available", true )
+	}
+
 	GamemodeSelectV2_PlayVideo( gamemodebutton1, "generic_02" )
 
 	var gamemodebutton2 = Hud_GetChild( file.menu, "GamemodeButton2" )
@@ -337,7 +345,8 @@ void function GamemodeButton1_Activate( var button )
 		return
 	}
 
-	print("buttons!!!")
+	ClientCommand( "quickjoin" )
+	//TestingShit()
 }
 
 void function GamemodeButton2_Activate( var button )

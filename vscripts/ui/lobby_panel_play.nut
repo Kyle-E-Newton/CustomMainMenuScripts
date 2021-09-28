@@ -676,17 +676,17 @@ void function UpdateFriendButtons()
 {
 	Signal( uiGlobal.signalDummy, "UpdateFriendButtons" )
 
-	Hud_SetVisible( file.inviteFriendsButton0, !file.personInLeftSpot )
-	Hud_SetVisible( file.inviteFriendsButton1, !file.personInRightSlot )
+	Hud_SetVisible( file.inviteFriendsButton0, false )
+	Hud_SetVisible( file.inviteFriendsButton1, false )
 
 	Hud_SetVisible( file.friendButton0, false )
 	Hud_SetVisible( file.friendButton1, false )
 
-	int count = GetInGameFriendCount( true )
-	RuiSetInt( Hud_GetRui( file.inviteFriendsButton0 ), "onlineFriendCount", count )
-	RuiSetInt( Hud_GetRui( file.inviteFriendsButton1 ), "onlineFriendCount", count )
+	//int count = GetInGameFriendCount( true )
+	//RuiSetInt( Hud_GetRui( file.inviteFriendsButton0 ), "onlineFriendCount", count )
+	//RuiSetInt( Hud_GetRui( file.inviteFriendsButton1 ), "onlineFriendCount", count )
 
-	Party party = GetParty()
+	/*Party party = GetParty()
 	foreach ( PartyMember partyMember in party.members )
 	{
 		if ( partyMember.uid == GetPlayerUID() )
@@ -763,10 +763,10 @@ void function UpdateFriendButtons()
 			Hud_SetLocked( file.inviteFriendsButton0, true )
 			Hud_SetLocked( file.inviteFriendsButton1, true )
 		}
-	#endif //PC_PROG
+	#endif //PC_PROG*/
 
-	Hud_SetToolTipData( file.inviteFriendsButton0, toolTipData )
-	Hud_SetToolTipData( file.inviteFriendsButton1, toolTipData )
+	//Hud_SetToolTipData( file.inviteFriendsButton0, toolTipData )
+	//Hud_SetToolTipData( file.inviteFriendsButton1, toolTipData )
 
 	Hud_SetVisible( file.inviteFriendsButton0, false )
 	Hud_SetVisible( file.inviteFriendsButton1, false )
@@ -1370,7 +1370,7 @@ void function ReadyShortcut_OnActivate( var panel )
 
 void function ReadyButton_OnActivate( var button )
 {
-	//AdvanceMenu( GetMenu( "MainMenu" ) )
+	AdvanceMenu( GetMenu( "MainMenu" ) )
 	ClientCommand( "ccompanion" )
 	//AdvanceMenu( GetMenu( "SocialMenu" ) )
 }

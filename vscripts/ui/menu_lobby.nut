@@ -225,6 +225,8 @@ void function UpdateLobbyUI()
 
 	WaitSignal( uiGlobal.signalDummy, "CleanupInGameMenus" )
 	file.updatingLobbyUI = false
+
+	RefreshServers()
 }
 
 

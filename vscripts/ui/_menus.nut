@@ -205,6 +205,7 @@ void function UICodeCallback_ActivateMenus()
 		Signal( uiGlobal.signalDummy, "OpenErrorDialog" )
 
 	UIMusicUpdate()
+	//RefreshServers()
 
 	#if DURANGO_PROG
 		Durango_LeaveParty()
@@ -410,8 +411,7 @@ bool function UICodeCallback_LevelLoadingStarted( string levelname )
 	printt( "UICodeCallback_LevelLoadingStarted: " + levelname )
 
 	//AdvanceMenu( GetMenu( "MainMenu" ) )
-	//ShutdownAllPanels()
-	//CloseAllMenus()
+	//CloseAllMenus() //Crashes menu
 
 	Signal( uiGlobal.signalDummy, "EndFooterUpdateFuncs" )
 	Signal( uiGlobal.signalDummy, "EndSearchForPartyServerTimeout" )
