@@ -1,5 +1,7 @@
 This is the scripts for my custom main menu for r5reloaded
 
+I recommend a fresh scripts install before installing this.
+
 
 Quick install guide
 
