@@ -16,4 +16,6 @@ Quick install guide
 
 Downloads:
 
+CustomMainMenu: https://github.com/I-Am-Zee/CustomMainMenuScripts/archive/refs/heads/main.zip
+
 Frontend.bik: https://mega.nz/file/aw4AxRTR#eMunh5wlqp6B9zeNOGnpke08RZAyPtx5Ou0zx4ve_ms
