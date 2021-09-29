@@ -5,11 +5,13 @@ I recommend a fresh scripts install before installing this.
 
 Quick install guide
 
-move the platform folder into your main folder and replace.
+1.Download The Two Files Below
 
-move r5detours.dll and r5dev.dll over into your main apex folder and replace.
+2.move the platform folder into your main folder and replace.
 
-move the frontend.bik file into your apex media folder and replace. (%apexfolder%/media/)
+3.move r5detours.dll and r5dev.dll over into your main apex folder and replace.
+
+4.move the frontend.bik file into your apex media folder and replace. (%apexfolder%/media/)
 
 
 Downloads:
